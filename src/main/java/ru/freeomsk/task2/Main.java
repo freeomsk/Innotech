@@ -1,5 +1,6 @@
 package ru.freeomsk.task2;
 
+import java.text.DecimalFormat;
 import java.util.*;
 
 public class Main {
@@ -19,26 +20,35 @@ public class Main {
         // 2. Найти в списке целых чисел 3-е наибольшее число (пример: 5 2 10 9 4 3 10 1 13 => 10)
         List<Integer> numbers = Arrays.asList(5, 2, 10, 9, 4, 3, 10, 1, 13);
 
-        Integer thirdLargest = numbers.stream()
+        Optional<Integer> thirdLargest = numbers.stream()
                 .sorted(Comparator.reverseOrder()) // Сортировка по убыванию
-//                .sorted((a, b) -> b - a) // Альтернативный способ сортировки по убыванию
-                .toList() // Сборка в список
-                .get(2); // Получение третьего элемента (индексация с 0)
+                .skip(2) // Пропускаем первые два элемента
+                .findFirst(); // Пытаемся получить следующий элемент, который будет третьим по величине
 
-        System.out.println(thirdLargest);
+        // Проверяем, существует ли третий элемент, и обрабатываем оба случая:
+        if (thirdLargest.isPresent()) {
+            System.out.println("Третий по величине элемент: " + thirdLargest.get());
+        } else {
+            System.out.println("Третьего элемента не существует.");
+        }
 
         Utils.printFormatted('-', 57);
 
         // 3. Найти в списке целых чисел 3-е наибольшее «уникальное» число (пример: 5 2 10 9 4 3 10 1 13 => 9.
         // В отличие от прошлой задачи здесь разные 10 считаются за одно число).
 
-        Integer thirdLargestUnique = numbers.stream()
+        Optional<Integer> thirdLargestUnique = numbers.stream()
                 .distinct() // Удаление дубликатов
                 .sorted(Comparator.reverseOrder()) // Сортировка по убыванию
-                .toList() // Сборка в список
-                .get(2); // Получение третьего элемента (индексация с 0)
+                .skip(2) // Пропускаем первые два уникальных элемента
+                .findFirst(); // Пытаемся получить следующий элемент, который будет третьим по величине
 
-        System.out.println(thirdLargestUnique);
+        // Проверяем, существует ли третий элемент, и обрабатываем оба случая:
+        if (thirdLargestUnique.isPresent()) {
+            System.out.println("Третий по величине уникальный элемент: " + thirdLargestUnique.get());
+        } else {
+            System.out.println("Третьего уникального элемента не существует.");
+        }
 
         Utils.printFormatted('-', 57);
 
@@ -69,16 +79,20 @@ public class Main {
         Utils.printFormatted('-', 57);
 
         // 5. Имеется список объектов типа Сотрудник (имя, возраст, должность).
-        // Посчитаеь средний возраст сотрудников с должностью «Инженер».
+        // Посчитать средний возраст сотрудников с должностью «Инженер».
 
-        OptionalDouble averageAge = employees.stream()
+        // Создаем экземпляр DecimalFormat для округления до двух знаков после запятой
+        DecimalFormat df = new DecimalFormat("#.##");
+
+        double averageAge = employees.stream()
                 .filter(e -> "Инженер".equals(e.position())) // Фильтрация по должности «Инженер»
                 .mapToInt(Employee::age) // Преобразование в поток возрастов
-                .average(); // Расчет среднего значения
+                .average() // Расчет среднего значения
+                .orElse(Double.NaN); // Возвращаем NaN, если среднее значение отсутствует
 
-        if (averageAge.isPresent()) {
-            System.out.println("Средний возраст сотрудников с должностью «Инженер»: " +
-                    String.format("%.2f", averageAge.getAsDouble()));
+        if (!Double.isNaN(averageAge)) {
+            // Используем DecimalFormat для форматирования среднего возраста
+            System.out.println("Средний возраст сотрудников с должностью «Инженер»: " + df.format(averageAge));
         } else {
             System.out.println("Сотрудников с должностью «Инженер» не найдено.");
         }
@@ -97,7 +111,7 @@ public class Main {
         Utils.printFormatted('-', 57);
 
         // 7. Имеется строка с набором слов в нижнем регистре, разделенных пробелом.
-        // Построить хеш-мапу, в которой будут хранится пары: слово - сколько раз оно встречается во входной строке.
+        // Построить хеш-мапу, в которой будут храниться пары: слово - сколько раз оно встречается во входной строке.
 
         String input = "java python java c kotlin java javascript python kotlin java kotlin";
 
