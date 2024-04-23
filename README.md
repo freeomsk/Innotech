@@ -56,7 +56,7 @@ _Поток: 2_
 
 Дополнительно добавить метод **_awaitTermination()_** без таймаута, работающий аналогично стандартным пулам потоков.
 
-## Задача 4
+## [Задание 4](https://github.com/freeomsk/Innotech/tree/master/src/main/java/ru/freeomsk/task4)
 
 - развернуть локально postgresql БД, создать таблицу users (id bigserial primary key, username varchar(255) unique);
 - создать Maven проект и подключить к нему: драйвер postgresql, hickaricp, spring context;
