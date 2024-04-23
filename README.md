@@ -58,10 +58,10 @@ _Поток: 2_
 
 ## [Задание 4](https://github.com/freeomsk/Innotech/tree/master/src/main/java/ru/freeomsk/task4)
 
-- развернуть локально postgresql БД, создать таблицу users (id bigserial primary key, username varchar(255) unique);
-- создать Maven проект и подключить к нему: драйвер postgresql, hickaricp, spring context;
+- развернуть локально postgresql БД, создать таблицу **_users_** (**_id_** bigserial primary key, _**username**_ varchar(255) unique);
+- создать Maven проект и подключить к нему: драйвер **_**postgresql**_**, **_hickaricp_**, **_spring context_**;
 - создать пул соединений в виде Spring бина;
-- создать класс User (Long id, String username);
-- реализовать в виде бина класс UserDao, который позволяет выполнять CRUD операции над пользователями;
-- реализовать в виде бина UserService, который позволяет создавать, удалять, получать одного, получать всех пользователей из базы данных;
-- создать SpringContext, получить из него бин UserService и выполнить все возможные операции.
+- создать класс **_User_** (Long **_id_**, String _**username**_);
+- реализовать в виде бина класс **_UserDao_**, который позволяет выполнять CRUD операции над пользователями;
+- реализовать в виде бина **_UserService_**, который позволяет создавать, удалять, получать одного, получать всех пользователей из базы данных;
+- создать **_SpringContext_**, получить из него бин **_UserService_** и выполнить все возможные операции.
