@@ -32,4 +32,5 @@ public class ProductServiceClient {
         );
         return response.getBody();
     }
+
 }

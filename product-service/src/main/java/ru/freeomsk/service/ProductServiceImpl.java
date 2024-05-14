@@ -6,6 +6,7 @@ import ru.freeomsk.exception.ServiceException;
 import ru.freeomsk.model.Product;
 import ru.freeomsk.repository.ProductRepository;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -54,5 +55,16 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public void deleteProduct(Long id) {
         productRepository.deleteById(id);
+    }
+
+    @Override
+    public boolean isProductValidAndSufficient(Long productId, BigDecimal amount) {
+        Optional<Product> productOpt = getProductById(productId);
+        if (productOpt.isPresent()) {
+            Product product = productOpt.get();
+            // Проверка, что баланс продукта больше или равен сумме платежа
+            return product.getBalance().compareTo(amount) >= 0;
+        }
+        return false;
     }
 }

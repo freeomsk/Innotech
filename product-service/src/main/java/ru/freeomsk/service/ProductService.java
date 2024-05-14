@@ -3,6 +3,7 @@ package ru.freeomsk.service;
 import org.springframework.stereotype.Service;
 import ru.freeomsk.model.Product;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,4 +15,5 @@ public interface ProductService {
     List<Product> getAllProducts();
     Product updateProduct(Long id, Product product);
     void deleteProduct(Long id);
+    boolean isProductValidAndSufficient(Long productId, BigDecimal amount);
 }
