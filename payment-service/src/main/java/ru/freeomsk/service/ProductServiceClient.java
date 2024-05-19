@@ -7,7 +7,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import ru.freeomsk.model.Product;
+import ru.freeomsk.entity.Product;
 
 import java.util.List;
 
@@ -15,11 +15,13 @@ import java.util.List;
 public class ProductServiceClient {
     private final RestTemplate restTemplate;
     private final String productServiceUrl;
+    static Product product;
 
     @Autowired
-    public ProductServiceClient(RestTemplate restTemplate, @Value("${product-service.url}") String productServiceUrl) {
+    public ProductServiceClient(RestTemplate restTemplate, @Value("${product-service.url}") String productServiceUrl, Product product) {
         this.restTemplate = restTemplate;
         this.productServiceUrl = productServiceUrl;
+        ProductServiceClient.product = product;
     }
 
     public List<Product> getAllProducts() {

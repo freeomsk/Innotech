@@ -10,7 +10,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(InsufficientFundsException.class)
     public ResponseEntity<String> handleInsufficientFunds(InsufficientFundsException ex) {
-        // клиент получит ответ с кодом 400 и сообщением об ошибке, указывающим на проблему с недостатком средств
+        // Клиент получит ответ с кодом 400 и сообщением об ошибке, указывающим на проблему с недостатком средств
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
     }
 
@@ -23,7 +23,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(Exception.class)
     public ResponseEntity<?> handleGlobalException(Exception ex) {
         // Возвращаем статус 500 Internal Server Error для всех остальных исключений
-        return new ResponseEntity<>("An error occurred: " + ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<>("An error occurred " + ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
 }

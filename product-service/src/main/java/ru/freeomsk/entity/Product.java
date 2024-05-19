@@ -1,13 +1,26 @@
-package ru.freeomsk.model;
+package ru.freeomsk.entity;
 
+import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.util.Objects;
 
+@Entity
+@Table(name = "products")
 public class Product {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(name = "user_id", nullable = false)
     private Long userId;
+
+    @Column(name = "account_number", nullable = false, unique = true)
     private String accountNumber;
+
+    @Column(name = "balance", nullable = false, precision = 19, scale = 2)
     private BigDecimal balance;
+
+    @Column(name = "product_type", nullable = false)
     private String productType;
 
     public Product() {
@@ -64,9 +77,12 @@ public class Product {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Product product = (Product) o;
-        return Objects.equals(id, product.id) && Objects.equals(userId, product.userId) && Objects.equals(accountNumber, product.accountNumber) && Objects.equals(balance, product.balance) && Objects.equals(productType, product.productType);
+        if (!(o instanceof Product product)) return false;
+        return Objects.equals(id, product.id) &&
+                Objects.equals(userId, product.userId) &&
+                Objects.equals(accountNumber, product.accountNumber) &&
+                Objects.equals(balance, product.balance) &&
+                Objects.equals(productType, product.productType);
     }
 
     @Override
@@ -81,7 +97,7 @@ public class Product {
                 ", userId=" + userId +
                 ", accountNumber='" + accountNumber + '\'' +
                 ", balance=" + balance +
-                ", productType=" + productType +
+                ", productType='" + productType + '\'' +
                 '}';
     }
 }

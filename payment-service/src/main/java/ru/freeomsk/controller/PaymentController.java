@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ru.freeomsk.model.Product;
+import ru.freeomsk.entity.Product;
 import ru.freeomsk.service.ProductServiceClient;
 
 import java.util.List;
