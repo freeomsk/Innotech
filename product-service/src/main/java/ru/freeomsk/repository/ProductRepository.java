@@ -1,22 +1,11 @@
 package ru.freeomsk.repository;
 
-import ru.freeomsk.model.Product;
+import org.springframework.data.jpa.repository.JpaRepository;
+import ru.freeomsk.entity.Product;
 
 import java.util.List;
-import java.util.Optional;
 
-public interface ProductRepository {
-
-    List<Product> findAll();
-
-    List<Product> findAllByUserId(Long userId);
-
-    Optional<Product> findById(Long id);
-
-    Product save(Product product);
-
-    Product update(Long id, Product product);
-
-    void deleteById(Long id);
-
+public interface ProductRepository extends JpaRepository<Product, Long> {
+    List<Product> findByProductType(String productType);
+    List<Product> findByUserId(Long userId);
 }
